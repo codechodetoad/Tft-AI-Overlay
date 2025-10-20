@@ -1,8 +1,0 @@
-# TFT AI Overlay - MVP
-
-A simple overlay for Teamfight Tactics that provides basic recommendations based on game state.
-
-## Installation
-
-1. Make sure you have Python 3.7+ installed
-2. Install required packages:
