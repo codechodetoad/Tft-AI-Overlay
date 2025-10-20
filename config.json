@@ -1,0 +1,60 @@
+{
+  "rules": [
+    {
+      "condition": {
+        "field": "level",
+        "operator": "eq",
+        "value": 5
+      },
+      "recommendation": "At level 5, focus on building a strong board before leveling to 6."
+    },
+    {
+      "condition": {
+        "field": "gold",
+        "operator": "gt",
+        "value": 50
+      },
+      "recommendation": "You have excess gold. Consider leveling up or rolling for key units."
+    },
+    {
+      "condition": {
+        "field": "synergy.Mystic",
+        "operator": "gte",
+        "value": 2
+      },
+      "recommendation": "Mystic synergy is active. Consider adding more Mystic units or items that benefit them."
+    },
+    {
+      "condition": {
+        "field": "shop_has",
+        "operator": "contains",
+        "value": "Thresh"
+      },
+      "recommendation": "Thresh is available. He's a strong unit for late-game compositions."
+    },
+    {
+      "condition": {
+        "field": "health",
+        "operator": "lt",
+        "value": 40
+      },
+      "recommendation": "Low health! Consider leveling up to stabilize your board."
+    },
+    {
+      "condition": {
+        "field": "stage",
+        "operator": "contains",
+        "value": "3-2"
+      },
+      "recommendation": "Stage 3-2 is a key power spike. Consider leveling to 6 if your board is weak."
+    },
+    {
+      "condition": {
+        "field": "synergy.Invoker",
+        "operator": "gte",
+        "value": 2
+      },
+      "recommendation": "Invoker synergy is active. Consider building around Ahri or Viktor as carries."
+    }
+  ]
+}

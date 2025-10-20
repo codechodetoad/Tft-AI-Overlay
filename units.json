@@ -1,0 +1,47 @@
+{
+  "Ahri": {
+    "cost": 2,
+    "traits": ["Mystic", "Invoker"],
+    "recommended_items": ["Blue Buff", "Morellonomicon", "Rabadon's Deathcap"]
+  },
+  "Viktor": {
+    "cost": 3,
+    "traits": ["Battlecast", "Invoker"],
+    "recommended_items": ["Morellonomicon", "Rabadon's Deathcap", "Jeweled Gauntlet"]
+  },
+  "Syndra": {
+    "cost": 2,
+    "traits": ["Mystic", "Star Guardian"],
+    "recommended_items": ["Blue Buff", "Rabadon's Deathcap", "Archangel's Staff"]
+  },
+  "Thresh": {
+    "cost": 4,
+    "traits": ["Reaper", "Vanguard"],
+    "recommended_items": ["Bramble Vest", "Sunfire Cape", "Red Buff"]
+  },
+  "Kai'Sa": {
+    "cost": 2,
+    "traits": ["Reaper", "Blademaster"],
+    "recommended_items": ["Giant Slayer", "Infinity Edge", "Last Whisper"]
+  },
+  "Ashe": {
+    "cost": 3,
+    "traits": ["Ranger", "Celestial"],
+    "recommended_items": ["Giant Slayer", "Red Buff", "Last Whisper"]
+  },
+  "Warwick": {
+    "cost": 1,
+    "traits": ["Reaper", "Brawler"],
+    "recommended_items": ["Bramble Vest", "Red Buff", "Titan's Resolve"]
+  },
+  "Lulu": {
+    "cost": 2,
+    "traits": ["Mystic", "Star Guardian"],
+    "recommended_items": ["Zeke's Herald", "Shroud of Stillness", "Morellonomicon"]
+  },
+  "Vayne": {
+    "cost": 1,
+    "traits": ["Ranger", "Celestial"],
+    "recommended_items": ["Giant Slayer", "Last Whisper", "Red Buff"]
+  }
+}
