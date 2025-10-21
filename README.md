@@ -18,39 +18,73 @@ An AI-powered overlay for Teamfight Tactics that provides strategic recommendati
 
 ## Quick Start
 
-### 1. Install Dependencies
+### ⚡ Super Easy Method (Using Makefile)
 
 ```bash
+# One-time setup (creates venv, installs everything)
+make setup
+
+# Run the app
+make run
+```
+
+### 🚀 Alternative Easy Method (Using run script)
+
+```bash
+# Just run this - it handles everything automatically
+./run.sh
+```
+
+### 📋 Manual Method
+
+#### 1. Setup Virtual Environment
+
+```bash
+# Create virtual environment
+python3 -m venv venv
+
+# Activate it
+source venv/bin/activate  # Linux/Mac/WSL
+# OR
+venv\Scripts\activate     # Windows
+
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-### 2. Install Tesseract OCR
+#### 2. Install Tesseract OCR (Optional - for OCR features)
 
 **Windows**: Download from https://github.com/UB-Mannheim/tesseract/wiki
 
-**Linux**:
+**Linux/WSL**:
 ```bash
 sudo apt-get install tesseract-ocr
+# Or use: make install-tesseract
 ```
 
-### 3. Configure API Key
+#### 3. Configure API Key (Optional - for AI features)
 
-1. Copy `.env.example` to `.env`:
-   ```bash
-   cp .env.example .env
-   ```
+Edit `.env` and add your OpenAI API key:
+```
+OPENAI_API_KEY=your-actual-api-key-here
+```
 
-2. Edit `.env` and add your OpenAI API key:
-   ```
-   OPENAI_API_KEY=your-actual-api-key-here
-   ```
+Get your API key from: https://platform.openai.com/api-keys
 
-   Get your API key from: https://platform.openai.com/api-keys
-
-### 4. Run the Application
+#### 4. Run the Application
 
 ```bash
+# If venv is activated:
 python overlay.py
+
+# Or use full path:
+venv/bin/python overlay.py
+
+# Or use make:
+make run
+
+# Or use run script:
+./run.sh
 ```
 
 ## Usage

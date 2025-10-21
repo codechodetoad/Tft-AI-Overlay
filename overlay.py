@@ -3,14 +3,8 @@ from tkinter import ttk, scrolledtext, messagebox, simpledialog
 import json
 from game_state import GameState
 from analyzer import Analyzer
-from ai_analyzer import AIAnalyzer
 from screen_capture import ScreenCapture
 from ocr_reader import OCRReader
-import os
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
 
 class TFTOverlay:
     def __init__(self, root):
@@ -27,13 +21,9 @@ class TFTOverlay:
         
         # Initialize game state and analyzers
         self.game_state = GameState()
-        self.analyzer = Analyzer()  # Rule-based analyzer
-        self.ai_analyzer = AIAnalyzer()  # AI-enhanced analyzer
+        self.analyzer = Analyzer()
         self.screen_capture = ScreenCapture()
         self.ocr_reader = OCRReader()
-
-        # Track which analyzer to use
-        self.use_ai = os.getenv('OPENAI_API_KEY') and os.getenv('OPENAI_API_KEY') != 'your_openai_api_key_here'
         
         # Create UI elements
         self.create_widgets()
@@ -103,11 +93,8 @@ class TFTOverlay:
             self.status_var.set("No game state")
             return
 
-        # Get recommendation from analyzer (use AI if available)
-        if self.use_ai:
-            hint = self.ai_analyzer.analyze(self.game_state)
-        else:
-            hint = self.analyzer.analyze(self.game_state)
+        # Get recommendation from analyzer
+        hint = self.analyzer.analyze(self.game_state)
 
         # Display recommendation
         self.recommendation.config(state=tk.NORMAL)
@@ -115,7 +102,7 @@ class TFTOverlay:
         self.recommendation.insert(tk.END, hint)
         self.recommendation.config(state=tk.DISABLED)
 
-        self.status_var.set("Hint generated (AI)" if self.use_ai else "Hint generated (Rules)")
+        self.status_var.set("Hint generated")
     
     def input_state(self):
         """Open dialog to input game state"""

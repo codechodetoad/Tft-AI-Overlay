@@ -1,17 +1,16 @@
 import pytesseract
-from PIL import Image, ImageEnhance, ImageFilter
 import re
-import os
+from PIL import Image, ImageEnhance, ImageFilter
 from dotenv import load_dotenv
+import os
 
-# Load environment variables
 load_dotenv()
 
 class OCRReader:
     def __init__(self):
         # Set Tesseract path if specified in environment
         tesseract_path = os.getenv('TESSERACT_PATH')
-        if tesseract_path and os.path.exists(tesseract_path):
+        if tesseract_path:
             pytesseract.pytesseract.tesseract_cmd = tesseract_path
 
     def preprocess_image(self, img):
