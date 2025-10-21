@@ -2,11 +2,17 @@ import mss
 import mss.tools
 from PIL import Image
 import os
+import sys
+import subprocess
 from datetime import datetime
 
 class ScreenCapture:
     def __init__(self):
-        self.sct = mss.mss()
+        self.is_wsl = 'microsoft' in os.uname().release.lower()
+
+        if not self.is_wsl:
+            self.sct = mss.mss()
+
         self.capture_dir = "captures"
 
         # Create captures directory if it doesn't exist
@@ -15,12 +21,54 @@ class ScreenCapture:
 
     def capture_full_screen(self):
         """Capture the entire screen"""
+        if self.is_wsl:
+            return self._capture_wsl()
+
         monitor = self.sct.monitors[1]  # Primary monitor
         screenshot = self.sct.grab(monitor)
 
         # Convert to PIL Image
         img = Image.frombytes("RGB", screenshot.size, screenshot.bgra, "raw", "BGRX")
         return img
+
+    def _capture_wsl(self):
+        """Capture screen from WSL using PowerShell"""
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        # Use absolute path in the project captures directory
+        wsl_path = os.path.abspath(os.path.join(self.capture_dir, f"temp_{timestamp}.png"))
+
+        # Convert WSL path to Windows path
+        # Get the current working directory's Windows path
+        wsl_cwd = os.getcwd()
+        if wsl_cwd.startswith('/mnt/'):
+            # Convert /mnt/c/path/to/file to C:\path\to\file
+            drive = wsl_cwd[5].upper()
+            windows_path = f"{drive}:{wsl_cwd[6:]}".replace("/", "\\")
+            windows_temp = os.path.join(windows_path, self.capture_dir, f"temp_{timestamp}.png").replace("/", "\\")
+        else:
+            raise Exception("Not running in WSL /mnt/ path")
+
+        # PowerShell script to capture screen
+        ps_script = f"""
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
+$screen = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds
+$bitmap = New-Object System.Drawing.Bitmap $screen.Width, $screen.Height
+$graphics = [System.Drawing.Graphics]::FromImage($bitmap)
+$graphics.CopyFromScreen($screen.Location, [System.Drawing.Point]::Empty, $screen.Size)
+$bitmap.Save('{windows_temp}')
+$graphics.Dispose()
+$bitmap.Dispose()
+"""
+
+        try:
+            subprocess.run(['powershell.exe', '-Command', ps_script], check=True, capture_output=True)
+            img = Image.open(wsl_path)
+            os.remove(wsl_path)  # Clean up temp file
+            return img
+        except Exception as e:
+            raise Exception(f"WSL screen capture failed: {e}")
 
     def capture_region(self, left, top, width, height):
         """

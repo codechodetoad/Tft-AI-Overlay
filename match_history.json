@@ -1,0 +1,68 @@
+[
+  {
+    "timestamp": "2025-10-21T15:50:22.015755",
+    "placement": 5,
+    "comp_name": "",
+    "final_level": 5,
+    "board": [
+      {
+        "unit": "Ahri",
+        "stars": 2,
+        "items": [
+          "Blue Buff"
+        ],
+        "position": [
+          0,
+          0
+        ]
+      }
+    ],
+    "synergies": {
+      "Mystic": 2
+    }
+  },
+  {
+    "timestamp": "2025-10-21T15:50:26.893188",
+    "placement": 6,
+    "comp_name": "",
+    "final_level": 5,
+    "board": [
+      {
+        "unit": "Ahri",
+        "stars": 2,
+        "items": [
+          "Blue Buff"
+        ],
+        "position": [
+          0,
+          0
+        ]
+      }
+    ],
+    "synergies": {
+      "Mystic": 2
+    }
+  },
+  {
+    "timestamp": "2025-10-21T15:50:30.758869",
+    "placement": 1,
+    "comp_name": "",
+    "final_level": 5,
+    "board": [
+      {
+        "unit": "Ahri",
+        "stars": 2,
+        "items": [
+          "Blue Buff"
+        ],
+        "position": [
+          0,
+          0
+        ]
+      }
+    ],
+    "synergies": {
+      "Mystic": 2
+    }
+  }
+]
