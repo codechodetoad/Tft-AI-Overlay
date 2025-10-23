@@ -10,3 +10,7 @@ numpy==1.26.2
 
 # Phase 3: Computer Vision
 opencv-python==4.8.1.78
+
+# Phase 3: Web scraping
+requests==2.31.0
+beautifulsoup4==4.12.2
