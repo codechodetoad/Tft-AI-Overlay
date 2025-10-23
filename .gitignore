@@ -66,3 +66,24 @@ tmp/
 temp/
 *.tmp
 
+# Documentation (keep only main README)
+PROJECT_REVIEW.md
+FEATURES_IMPLEMENTED.md
+Missing_features.md
+HOW_TO_RUN.md
+QUICKSTART.md
+
+# Data and cache
+data/
+data_cache/
+champion_templates/
+match_history.json
+comp_library.json
+last_update.json
+scraper_cache.json
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+

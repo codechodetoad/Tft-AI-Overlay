@@ -1,207 +1,238 @@
-# TFT AI Overlay
+# TFT Overlay
 
-An AI-powered overlay for Teamfight Tactics that provides strategic recommendations in real-time.
+A comprehensive overlay for Teamfight Tactics with strategic recommendations, computer vision, and meta data integration.
 
-## Features
+## 🎮 Features
 
-### Phase 1 (MVP) ✅
-- Manual game state input
+### Phase 1-2: Core Functionality ✅
+- Manual game state input (JSON)
 - Rule-based strategic recommendations
 - Always-on-top overlay window
-- JSON-based configuration
-
-### Phase 2 (Advanced) ✅
-- Screen capture functionality
+- Screen capture (WSL2 compatible)
 - OCR-based game state detection
-- OpenAI GPT integration for AI recommendations
-- Environment variable management for API keys
+- Multi-tab interface (Main, Stats, Comps, Settings)
 
-## Quick Start
+### Phase 3-5: Advanced Features ✅
+- **Database System** - SQLAlchemy ORM for champions, items, augments, compositions
+- **Web Scraping** - Live meta data from MetaTFT.com
+- **Computer Vision** - Board detection, star recognition, unit positioning
+- **Win Probability Calculator** - Heuristic-based placement predictions
+- **Positioning Optimizer** - Auto tank/carry/support placement with hex grid
+- **Itemization Guide** - Smart item recommendations per champion
+- **Economy Tracker** - Interest, leveling, and rolling advice
+- **Match History** - Track placements and statistics
+- **Composition Library** - Save and load team comps
+- **Game Detector** - Auto-detect League client
+- **Keyboard Shortcuts** - F1-F4 hotkeys
+- **Themes** - Dark, Light, and TFT-themed colors
 
-### ⚡ Super Easy Method (Using Makefile)
+## 🚀 Quick Start
 
 ```bash
-# One-time setup (creates venv, installs everything)
+# One-time setup
 make setup
 
-# Run the app
+# Run the overlay
 make run
 ```
 
-### 🚀 Alternative Easy Method (Using run script)
+## 📦 Installation
+
+### 1. Install Dependencies
 
 ```bash
-# Just run this - it handles everything automatically
-./run.sh
-```
+# Create virtual environment and install everything
+make setup
 
-### 📋 Manual Method
-
-#### 1. Setup Virtual Environment
-
-```bash
-# Create virtual environment
+# Or manually:
 python3 -m venv venv
-
-# Activate it
-source venv/bin/activate  # Linux/Mac/WSL
-# OR
-venv\Scripts\activate     # Windows
-
-# Install dependencies
-pip install -r requirements.txt
+venv/bin/pip install -r requirements.txt
 ```
 
-#### 2. Install Tesseract OCR (Optional - for OCR features)
+### 2. Install Tesseract OCR (Optional - for OCR features)
 
-**Windows**: Download from https://github.com/UB-Mannheim/tesseract/wiki
-
-**Linux/WSL**:
+**Linux/WSL:**
 ```bash
 sudo apt-get install tesseract-ocr
-# Or use: make install-tesseract
 ```
 
-#### 3. Configure API Key (Optional - for AI features)
+**Windows:** Download from https://github.com/UB-Mannheim/tesseract/wiki
 
-Edit `.env` and add your OpenAI API key:
-```
-OPENAI_API_KEY=your-actual-api-key-here
-```
-
-Get your API key from: https://platform.openai.com/api-keys
-
-#### 4. Run the Application
+### 3. Initialize Game Data
 
 ```bash
-# If venv is activated:
-python overlay.py
+# Update meta data from web
+make update-data
+```
 
-# Or use full path:
-venv/bin/python overlay.py
+## 🎯 Usage
 
-# Or use make:
+### Run the Application
+
+```bash
 make run
-
-# Or use run script:
-./run.sh
 ```
 
-## Usage
+### Features Available
 
-### Manual Mode
-1. Click "Input State" button
-2. Enter your game state as JSON (or click "Load Example")
-3. Click "Get Hint" for AI recommendations
+1. **Manual Input** - Click "Input State" → Load example or enter JSON → "Get Hint"
+2. **Screen Capture** - Click "Capture Screen" (F3) to save screenshot
+3. **OCR Analysis** - Click "OCR Analyze" (F4) to extract game stats
+4. **Auto-Updates** - Toggle "Start Auto-Update" for background monitoring
+5. **Match History** - Save matches, view stats (Top 4 rate, Win rate)
+6. **Comp Library** - Save/load team compositions
 
-### Automated Mode (Phase 2)
-1. Click "Capture Screen" to screenshot the game
-2. Click "OCR Analyze" to extract game stats automatically
-3. Click "Get Hint" for AI-powered recommendations
+### Keyboard Shortcuts
 
-## Files Created
+- **F1** - Get Hint
+- **F2** - Input State
+- **F3** - Capture Screen
+- **F4** - OCR Analyze
 
-- **[.gitignore](.gitignore)** - Protects your API keys from being committed
-- **[.env](.env)** - Your environment variables (add your API key here)
-- **[.env.example](.env.example)** - Template for environment variables
-- **[requirements.txt](requirements.txt)** - Python dependencies
-- **[implementation_guide.md](implementation_guide.md)** - Comprehensive development guide
-
-## New Phase 2 Files
-
-- **[screen_capture.py](screen_capture.py)** - Screen capture functionality
-- **[ocr_reader.py](ocr_reader.py)** - OCR text extraction
-- **[ai_analyzer.py](ai_analyzer.py)** - AI-enhanced analyzer
-
-## Project Structure
+## 📁 Project Structure
 
 ```
-Tft-AI-Overlay/
-├── .env                    # Your API keys (DO NOT COMMIT)
-├── .env.example            # Template
-├── .gitignore              # Protects sensitive files
-├── requirements.txt        # Dependencies
-│
-├── config.json            # Recommendation rules
-├── units.json             # Unit data
-│
-├── game_state.py          # Game state model
-├── analyzer.py            # Rule-based analyzer
-├── ai_analyzer.py         # AI analyzer (NEW)
-├── screen_capture.py      # Screen capture (NEW)
-├── ocr_reader.py          # OCR functionality (NEW)
-└── overlay.py             # Main application
+src/
+├── main/               # Main application
+│   ├── overlay.py
+│   └── overlay_enhanced.py
+├── utilities/          # Core utilities
+│   ├── game_state.py
+│   ├── analyzer.py
+│   ├── screen_capture.py
+│   ├── ocr_reader.py
+│   └── ...
+├── database/          # SQLAlchemy models & manager
+├── scrapers/          # Web scraping (MetaTFT)
+├── analysis/          # Win calc, positioning, itemization
+├── automation/        # Game detection
+└── core/             # Master controller
+
+config.json           # Recommendation rules
+units.json           # Champion database
+requirements.txt     # Dependencies
+tft_overlay.py       # Main launcher
+Makefile            # Build commands
 ```
 
-## Configuration
+## 🔧 Advanced Features
 
-### Adding API Key
+### Win Probability
+Calculates top 1, top 4, and bottom 4 probabilities based on:
+- Health, level, gold
+- Board strength (cost × stars)
+- Stage progression
 
-Edit `.env`:
+### Positioning Optimizer
+Automatically places units:
+- **Tanks** → Front line (rows 0-1)
+- **Carries** → Back line corners (row 3)
+- **Supports** → Mid line (row 2)
+
+### Itemization Guide
+Recommends items based on:
+- Champion cost and role
+- Available components
+- Meta item priorities
+
+### Web Scraping
+Auto-updates every 6 hours:
+- Meta compositions with win rates
+- Augment tier lists (S/A/B/C/D)
+- Item priority rankings
+
+## 📊 Statistics
+
+- **Total Lines of Code**: ~4,000
+- **Modules**: 25+
+- **Phases Complete**: 1-5 (100%)
+- **Dependencies**: 12
+
+## 🛠️ Commands
+
 ```bash
-OPENAI_API_KEY=sk-proj-your-key-here
-OPENAI_MODEL=gpt-3.5-turbo  # or gpt-4
+make run          # Run the overlay
+make setup        # One-time setup
+make install      # Install/update dependencies
+make test         # Test installation
+make update-data  # Update meta data from web
+make clean        # Remove cache files
+make info         # Show project info
 ```
 
-### Adding Custom Rules
+## ⚙️ Configuration
+
+### Custom Rules
 
 Edit `config.json`:
 ```json
 {
   "rules": [
     {
-      "condition": {
-        "field": "level",
-        "operator": "eq",
-        "value": 8
-      },
-      "recommendation": "At level 8, start rolling for 5-cost units"
+      "condition": {"field": "level", "operator": "eq", "value": 8},
+      "recommendation": "At level 8, roll for 5-cost units"
     }
   ]
 }
 ```
 
-## Troubleshooting
+### Database
 
-### "ModuleNotFoundError"
+All data stored in `data/tft_overlay.db`:
+- Champions, items, augments, compositions
+- Match history
+- Champion templates (for recognition)
+
+## 🐛 Troubleshooting
+
+### ModuleNotFoundError
 ```bash
-pip install -r requirements.txt
+make install
 ```
 
-### "Could not detect game state" (OCR)
-- Ensure Tesseract is installed
-- Make sure TFT is visible on screen
-- Try higher game resolution
+### OCR Not Working
+- Install Tesseract: `sudo apt-get install tesseract-ocr`
+- Check TFT is visible on screen
+- Verify game resolution (1080p+ recommended)
 
-### "OpenAI API error"
-- Check API key in `.env`
-- Verify you have credits: https://platform.openai.com/usage
+### WSL2 Screen Capture Issues
+- Overlay uses PowerShell for WSL2 screen capture
+- Ensure Windows PowerShell is accessible
+- Game must be in windowed/borderless mode
 
-## Documentation
+## 🚧 Known Limitations
 
-See [implementation_guide.md](implementation_guide.md) for:
-- Detailed architecture
-- Phase-by-phase implementation details
-- API usage and costs
-- Advanced configuration
-- Future roadmap
+- Champion recognition requires manual template creation (~1-2 hours)
+- OCR accuracy varies by screen resolution
+- Web scraping depends on site structure (has fallbacks)
 
-## Security
+## 📚 Documentation
 
-- `.env` file is automatically excluded from git
-- Never commit API keys to version control
-- The `.gitignore` file protects sensitive data
+- **implementation_guide.md** - Technical implementation details
+- **Inline code comments** - Detailed function documentation
 
-## Requirements
+## 🔐 Security
+
+- `.gitignore` protects sensitive files
+- Database and cache files excluded from git
+- No API keys required (features degrade gracefully)
+
+## 🎓 Requirements
 
 - Python 3.7+
-- Tesseract OCR
-- OpenAI API key (optional, falls back to rule-based analysis)
+- Tesseract OCR (optional)
+- 1920x1080+ resolution (recommended)
 
-## License
+## 📄 License
 
 Educational / Personal Use
 
-## Disclaimer
+## ⚖️ Disclaimer
 
 This tool is not affiliated with Riot Games. Use responsibly and in accordance with TFT Terms of Service.
+
+---
+
+**Current Version**: Phase 5 Complete
+**Status**: Fully Functional
+**Platform**: Linux, macOS, WSL2, Windows
