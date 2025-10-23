@@ -1,13 +1,13 @@
 import tkinter as tk
 from tkinter import ttk, scrolledtext, messagebox, simpledialog
 import json
-from game_state import GameState
-from analyzer import Analyzer
-from screen_capture import ScreenCapture
-from ocr_reader import OCRReader
-from board_detector import BoardDetector
-from auto_updater import AutoUpdater
-from advanced_features import MatchHistory, CompLibrary, HotkeyManager, ThemeManager, EconomyTracker
+from utilities.game_state import GameState
+from utilities.analyzer import Analyzer
+from utilities.screen_capture import ScreenCapture
+from utilities.ocr_reader import OCRReader
+from utilities.board_detector import BoardDetector
+from utilities.auto_updater import AutoUpdater
+from utilities.advanced_features import MatchHistory, CompLibrary, HotkeyManager, ThemeManager, EconomyTracker
 
 class TFTOverlayEnhanced:
     def __init__(self, root):
